@@ -7,3 +7,7 @@ Please note adding too many universities may result in error.
 
 Developer - Anvit Tandon
 Date -  20/08/2023
+
+
+Added a feature to detect whether an event is online or offline.
+Date - 22/08/2023
