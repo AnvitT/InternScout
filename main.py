@@ -6,7 +6,6 @@ from onlineOfflineDetection import determine
 import sys
 import pandas as pd
 
-print("hi")
 
 def findLinks(query):
     try:
