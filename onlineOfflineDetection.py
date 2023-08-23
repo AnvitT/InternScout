@@ -39,7 +39,7 @@ def detector(text):
         if check.count(True) >= 1:
             onlinePointCounter += 1  
 
-    sureConclusionsOffline = ["held","offline","physical","face-to-face","on-campus","on-premises","offline.","physical.","face-to-face.","on-campus.","on-premises."]
+    sureConclusionsOffline = ["held","offline","physical","face-to-face","on-campus","on-premises","offline.","physical.","face-to-face.","in-person","in-person.","on-campus.","on-premises."]
     littleLessSure = ["accommodation","accommodation.","travel","travel.","hostel","hostel.","hostels","hostels."]
 
     for i in textList:
@@ -115,5 +115,4 @@ def determine(url):
         text = getText(url)
         return detector(text) 
     except:
-        return "Not Sure!"      
-       
+        return "Not Sure!"  
