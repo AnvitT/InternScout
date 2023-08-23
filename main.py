@@ -2,7 +2,7 @@ import time
 import concurrent.futures
 from googlesearch import search
 import csv
-from onlineOfflineDetection import *
+from onlineOfflineDetection import determine
 import sys
 import pandas as pd
 
@@ -34,17 +34,17 @@ def initializeGeneratedFile():
     try:
         with open('systemGenerated.csv', 'w') as generateFile:
             writer = csv.writer(generateFile)
-            field = ["College","Internship Links","Check","Hackathon Links","Check","Events","Check"]
+            field = ["College","Internship Links","Check","Hackathon Links","Check"]
             writer.writerow(field)
     except Exception as e:
         print(e)         
 
 
-def writeSystemGeneratedFile(college,internshipLink,status1,hackathonLink,status2,eventLink,status3):
+def writeSystemGeneratedFile(college,internshipLink,status1,hackathonLink,status2):
     try:
         with open('systemGenerated.csv', 'a') as generateFile:
             writer = csv.writer(generateFile)          
-            writer.writerow([college,internshipLink,status1,hackathonLink,status2,eventLink,status3])   
+            writer.writerow([college,internshipLink,status1,hackathonLink,status2])   
     except Exception as e:
         print(e) 
                           
@@ -76,23 +76,19 @@ def main():
     try:    
         with concurrent.futures.ThreadPoolExecutor() as executer:
 
-            findinternshipLinks = executer.submit(findLinks,"internship")
-            findhackathonLinks = executer.submit(findLinks,"hackathon")
-            findeventLinks = executer.submit(findLinks,"events")
+            findinternshipLinks = executer.submit(findLinks,"tech internship")
+            findhackathonLinks = executer.submit(findLinks,"coding hackathon")
 
             internshipLinks = findinternshipLinks.result()
             hackathonLinks = findhackathonLinks.result()
-            eventLinks = findeventLinks.result()
 
             print("\nFound Links!")
 
             checkingIntern = executer.submit(checkOnlineOffline,internshipLinks)
             checkingHackathon = executer.submit(checkOnlineOffline,hackathonLinks)
-            checkingEvent = executer.submit(checkOnlineOffline,eventLinks)
 
             checkedIntern = checkingIntern.result()
             checkedHackathon = checkingHackathon.result()
-            checkedEvent = checkingEvent.result()
 
             print("\nChecked online/offline!")
         
@@ -106,7 +102,7 @@ def main():
                 college = college.rstrip()
                 if not college:
                     continue
-                writeSystemGeneratedFile(college,internshipLinks[college],checkedIntern[college],hackathonLinks[college],checkedHackathon[college],eventLinks[college],checkedEvent[college])
+                writeSystemGeneratedFile(college,internshipLinks[college],checkedIntern[college],hackathonLinks[college],checkedHackathon[college])
         
         print('File created with the name "systemGenerated.csv"') 
 
