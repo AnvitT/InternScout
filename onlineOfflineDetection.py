@@ -115,4 +115,82 @@ def determine(url):
         text = getText(url)
         return detector(text) 
     except:
-        return "Not Sure!"  
+        return "Not Sure!"
+
+# Currently Working below!!
+
+# from fuzzywuzzy import fuzz
+# from nltk import tokenize
+# from nltk.corpus import stopwords
+# from nltk.corpus import wordnet
+# # from concurrent.futures import ThreadPoolExecutor
+# from nltk.stem import WordNetLemmatizer
+
+
+# # Removing stopwords (unnecessary words) from the text.
+# def removeStopwords(text):
+#     textList = text.split()
+#     for i in textList:
+#         if i in stopwords:
+#             textList.remove(i) 
+#     return textList
+
+
+# # Determine ONLINE/OFFLINE
+# def determine(text):
+#     onlinePointCounter = 0
+#     offlinePointCounter = 0
+
+#     textList = removeStopwords(text)
+#     lemmatizer = WordNetLemmatizer()
+
+#     # Calculating Wratio of each word with respect to some relevant words.
+#     sureConclusionsOnline = ["virtual","online","digital","web based","live-stream","video conference","webinar","remote","zoom","off-campus"]
+#     sureConclusionsOffline = ["offline","physical","face-to-face","on-campus","on-premises","in-person"]
+
+#     def getOnlineWratios():
+#         onlineWratios = {}
+#         for i in textList:
+#             i = lemmatizer.lemmatize(i)
+#             for j in sureConclusionsOnline:
+#                 tempRatio = fuzz.WRatio(i,j)
+#                 onlineWratios[i] = tempRatio
+#         return onlineWratios        
+
+#     def getOfflineWratios():
+#         offlineWratios = {}
+#         for i in textList:
+#             i = lemmatizer.lemmatize(i)
+#             for j in sureConclusionsOffline:
+#                 tempRatio = fuzz.WRatio(i,j)
+#                 offlineWratios[tempRatio,j] = i
+#         return offlineWratios
+    
+#     sentencesList = tokenize.sent_tokenize(text)
+
+#     def checkSameSentence(word1,word2):
+#         for i in 
+
+    
+#     # with ThreadPoolExecutor() as executer:
+#     #     findOnlineWratios = executer.submit(getOnlineWratios)   
+#     #     findOfflineWratios = executer.submit(getOfflineWratios)  
+
+#     #     onlineWratios = findOnlineWratios.result()
+#     #     offlineWratios = findOfflineWratios.result()
+
+#     onlineWratios = getOnlineWratios()
+#     offlineWratios = getOfflineWratios()
+#     print(onlineWratios)
+#     # print(offlineWratios)
+
+
+
+
+
+# if __name__ == "__main__":
+#     stopwords = set(stopwords.words('english'))
+#     text = "Given the prevailing health circumstances and the organizers' preference for broad and unrestricted participation, the imminent art exhibition will not physically occur in its typical setting. Instead, art enthusiasts can look forward to engaging with all pieces of art through a groundbreaking, user-friendly digital platform. This transition allows you to explore every art piece at your leisure and from the confinements of your own space. Essentially, the timing and date of this set-up will replicate the original plans."
+#     determine(text)
+
+
